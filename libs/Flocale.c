@@ -1150,6 +1150,10 @@ FlocaleFont *FlocaleGetFontSet(
 		{
 			free(fn);
 		}
+		if (ml != NULL)
+		{
+			XFreeStringList(ml);
+		}
 		return NULL;
 	}
 
