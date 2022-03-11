@@ -1867,9 +1867,8 @@ static void __move_window(F_CMD_ARGS, Bool do_animate, int mode)
 			fw->g.frame.height, True);
 		if (fWarp & !do_animate)
 		{
-			FWarpPointer(
-				dpy, None, None, 0, 0, 0, 0, FinalX - x,
-				FinalY - y);
+            char *cmd = "WarpToWindow 50 50";
+			execute_function_override_window(NULL, exc, cmd, 0, fw);
 		}
 		if (IS_MAXIMIZED(fw))
 		{
@@ -4670,6 +4669,7 @@ static void unmaximize_fvwm_window(
 	 * window being restored from fullscreen to a non-maximized state.
 	 */
 	apply_decor_change(fw);
+    EWMH_SetWMState(fw, True);
 	return;
 }
 
