@@ -1626,6 +1626,10 @@ static Bool size_menu_vertically(MenuSizingParameters *msp)
 		separator_height = (last_item_has_relief) ?
 			MENU_SEPARATOR_HEIGHT + relief_thickness :
 			MENU_SEPARATOR_TOTAL_HEIGHT;
+		if (MST_DO_FLAT_SEPARATOR(msp->menu))
+		{
+			separator_height += 1;
+		}
 		MI_Y_OFFSET(mi) = y;
 		if (MI_IS_TITLE(mi))
 		{
