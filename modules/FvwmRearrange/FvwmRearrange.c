@@ -183,7 +183,7 @@ int get_window(void)
     DeadPipe(0);
   else {
     cfgpacket = (struct ConfigWinPacket*) packet->body;
-    switch (packet->type &= ~M_EXTENDED_MSG) {
+    switch (packet->type) {
     case M_CONFIGURE_WINDOW:
       if (is_suitable_window(packet->body)) {
 	window_item *wi =
