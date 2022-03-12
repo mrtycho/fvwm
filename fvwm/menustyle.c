@@ -430,7 +430,7 @@ static int menustyle_get_styleopt_index(char *option)
 		"TrianglesUseFore",
 		"TitleColorset", "HilightTitleBack",
 		"TitleFont",
-		"VerticalMargins",
+		"VerticalMargins", "FlatSeparators",
 		"UniqueHotkeyActivatesImmediate",
 		NULL
 	};
@@ -900,6 +900,7 @@ MenuStyle *menustyle_parse_style(F_CMD_ARGS)
 			ST_SCROLL_OFF_PAGE(tmpms) = 1;
 			ST_DO_HILIGHT_TITLE_BACK(tmpms) = 0;
 			ST_USING_DEFAULT_TITLEFONT(tmpms) = True;
+			ST_DO_FLAT_SEPARATOR(tmpms) = 0;
 			has_gc_changed = True;
 			option = "fvwm";
 		}
@@ -1602,7 +1603,10 @@ MenuStyle *menustyle_parse_style(F_CMD_ARGS)
 				&ST_VERTICAL_MARGIN_BOTTOM(tmpms),
 				0, 0);
 			break;
-		case 63: /* UniqueHotKeyActivatesImmediate */
+		case 63: /* FlatSeparators */
+			ST_DO_FLAT_SEPARATOR(tmpms) = on;
+			break;
+		case 64: /* UniqueHotKeyActivatesImmediate */
 			ST_HOTKEY_ACTIVATES_IMMEDIATE(tmpms) = on;
 			break;
 
@@ -1863,6 +1867,8 @@ void menustyle_copy(MenuStyle *origms, MenuStyle *destms)
 	ST_TRIANGLES_USE_FORE(destms) = ST_TRIANGLES_USE_FORE(origms);
 	/* Title */
 	ST_DO_HILIGHT_TITLE_BACK(destms) = ST_DO_HILIGHT_TITLE_BACK(origms);
+	/* FlatSeparators */
+	ST_DO_FLAT_SEPARATOR(destms) = ST_DO_FLAT_SEPARATOR(origms);
 
 	menustyle_update(destms);
 

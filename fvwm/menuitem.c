@@ -81,10 +81,14 @@ static void clear_menu_item_background(
  *
  */
 static void draw_separator(
-	Window w, GC TopGC, GC BottomGC, int x1, int y, int x2)
+	Window w, GC TopGC, GC BottomGC, GC ForeGC, int x1, int y, int x2,
+	Bool do_flat_separators)
 {
 	XDrawLine(dpy, w, TopGC   , x1,   y,   x2,   y);
-	XDrawLine(dpy, w, BottomGC, x1-1, y+1, x2+1, y+1);
+	if (!do_flat_separators)
+	{
+			XDrawLine(dpy, w, BottomGC, x1-1, y+1, x2+1, y+1);
+	}
 
 	return;
 }
@@ -380,6 +384,7 @@ void menuitem_paint(
 	/*Pixel fg, fgsh;*/
 	int relief_thickness = ST_RELIEF_THICKNESS(ms);
 	Bool is_item_selected;
+	Bool do_flat_separators;
 	Bool item_cleared = False;
 	Bool xft_clear = False;
 	Bool empty_inter = False;
@@ -598,6 +603,8 @@ void menuitem_paint(
 	 * Draw the item itself.
 	 */
 
+	do_flat_separators = ST_DO_FLAT_SEPARATOR(ms);
+	
 	/* Calculate the separator offsets. */
 	if (ST_HAS_LONG_SEPARATORS(ms))
 	{
@@ -618,9 +625,9 @@ void menuitem_paint(
 		{
 			/* It's a separator. */
 			draw_separator(
-				mpip->w, gcs.shadow_gc, gcs.hilight_gc, sx1,
-				y_offset + y_height - MENU_SEPARATOR_HEIGHT,
-				sx2);
+				mpip->w, gcs.shadow_gc, gcs.hilight_gc, gcs.fore_gc,
+				sx1, y_offset + y_height - MENU_SEPARATOR_HEIGHT,
+				sx2, do_flat_separators);
 			/* Nothing else to do. */
 		}
 		return;
@@ -660,8 +667,8 @@ void menuitem_paint(
 			if (sx1 < sx2)
 			{
 				draw_separator(
-					mpip->w, gcs.shadow_gc, gcs.hilight_gc,
-					sx1, y, sx2);
+					mpip->w, gcs.shadow_gc, gcs.hilight_gc, gcs.fore_gc,
+					sx1, y, sx2, do_flat_separators);
 			}
 		}
 		/* Underline the title. */
@@ -674,8 +681,8 @@ void menuitem_paint(
 			{
 				y = y_offset + y_height - MENU_SEPARATOR_HEIGHT;
 				draw_separator(
-					mpip->w, gcs.shadow_gc, gcs.hilight_gc,
-					sx1, y, sx2);
+					mpip->w, gcs.shadow_gc, gcs.hilight_gc, gcs.fore_gc,
+					sx1, y, sx2, do_flat_separators);
 			}
 			break;
 		default:

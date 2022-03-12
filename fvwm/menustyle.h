@@ -23,6 +23,8 @@
 #define MST_FACE(m)                   ((m)->s->ms->look.face)
 #define ST_DO_HILIGHT_BACK(s)         ((s)->look.flags.do_hilight_back)
 #define MST_DO_HILIGHT_BACK(m)        ((m)->s->ms->look.flags.do_hilight_back)
+#define ST_DO_FLAT_SEPARATOR(s)       ((s)->look.flags.do_flat_separator)
+#define MST_DO_FLAT_SEPARATOR(m)      ((m)->s->ms->look.flags.do_flat_separator)
 #define ST_DO_HILIGHT_FORE(s)         ((s)->look.flags.do_hilight_fore)
 #define MST_DO_HILIGHT_FORE(m)        ((m)->s->ms->look.flags.do_hilight_fore)
 #define ST_DO_HILIGHT_TITLE_BACK(s)   ((s)->look.flags.do_hilight_title_back)
@@ -282,6 +284,7 @@ typedef struct MenuLook
 		unsigned has_title_cset : 1;
 		unsigned do_hilight_title_back : 1;
 		unsigned using_default_titlefont : 1;
+		unsigned do_flat_separator : 1;
 	} flags;
 	unsigned char ReliefThickness;
 	unsigned char TitleUnderlines;

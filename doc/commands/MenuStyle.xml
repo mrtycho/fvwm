@@ -58,7 +58,7 @@ PopupDelay,
 PopupOffset,
 TitleWarp / !TitleWarp,
 TitleUnderlines0 / TitleUnderlines1 / TitleUnderlines2,
-SeparatorsLong / SeparatorsShort,
+SeparatorsLong / SeparatorsShort / FlatSeparators,
 TrianglesSolid / TrianglesRelief,
 PopupImmediately / PopupDelayed,
 PopdownImmediately / PopdownDelayed,
@@ -434,6 +434,11 @@ specify how many lines are drawn below a menu title.</para>
 set the length of menu separators.  Long separators run from the
 left edge all the way to the right edge.  Short separators leave a
 few pixels to the edges of the menu.</para>
+
+<para>
+<fvwmopt cmd="MenuStyle" opt="FlatSeparators"/>
+changes the separators so that they are a single pixel thick and
+colored the same as the text.</para>
 
 <para>
 <fvwmopt cmd="MenuStyle" opt="TrianglesSolid"/> and
