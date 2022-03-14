@@ -2840,12 +2840,6 @@ FvwmWindow *AddWindow(
 			 * window exists with the same id that has not been
 			 * reparented (either the same window or a new one).
 			 */
-			if (Scr.bo.do_display_new_window_names)
-			{
-				fvwm_debug(
-					__func__, "new window disappeared"
-					" before it could be reparented");
-			}
 			destroy_window(fw);
 			fw = NULL;
 		}
