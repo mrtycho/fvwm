@@ -3174,11 +3174,6 @@ void HandleMapRequestKeepRaised(
 					 * stops non-iconified windows on
 					 * recapture from being iconified.
 					 */
-					fvwm_debug(__func__,
-					    "Window 0x%x is new "
-					    "and is being recaptured and in an "
-					    "iconic state. Sending fake map/unmap",
-					    (int)FW_W(fw));
 					fake_map_unmap_notify(fw, MapNotify);
 					fake_map_unmap_notify(fw, UnmapNotify);
 				}
